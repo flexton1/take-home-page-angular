@@ -1,0 +1,49 @@
+<div class="student-item" id="{{student.pkStudentId}}">
+  <div class="student-text d-flex flex-wrap justify-content-center">
+    <span class="p2 flex-fill" *ngIf="student.ime"
+      ><strong>Ime:</strong>{{ student.ime }}
+    </span>
+    <span class="p2 flex-fill" *ngIf="student.prezime"
+      ><strong> Prezime:</strong>{{ student.prezime }}
+    </span>
+    <span class="p2 flex-fill" *ngIf="student.brojIndeksa"
+      ><strong> Br. indeksa:</strong>{{ student.brojIndeksa }}</span
+    >
+    
+  </div>
+
+  <div class="student-controls-box">
+    <div
+    class="student-control-button"
+    (click)="onDetailsClicked()"
+    matTooltip="Detalji o studentu"
+  >
+    <mat-icon>info</mat-icon>
+  </div>
+    <div
+      class="student-control-button"
+      (click)="onEditClicked()"
+      matTooltip="Uredi studenta"
+    >
+      <mat-icon>edit</mat-icon>
+    </div>
+
+    <span *ngIf="confirmDelete">
+      <span style="margin-right: 5px">Obrisati?</span>
+      <button class="btn btn-danger" (click)="onDeleteClicked()">Da</button>
+      <button class="btn btn-primary" (click)="confirmDelete = false">
+        Ne
+      </button>
+    </span>
+
+    <div
+      *ngIf="!confirmDelete"
+      class="student-control-button btn-danger"
+      (click)="confirmDelete = true"
+      matTooltip="Obriši studenta"
+    >
+      <mat-icon>delete</mat-icon>
+    </div>
+  </div>
+</div>
+<hr>

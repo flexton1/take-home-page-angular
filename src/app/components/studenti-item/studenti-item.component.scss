@@ -1,0 +1,92 @@
+.student-item {
+    // display: flex;
+    // align-items: center;
+    position: relative;
+  
+    cursor: pointer;
+  
+    padding: 35px 15px;
+    font-size: 18px;
+  
+    border-bottom: 1px solid #f2f3f5;
+  
+    
+    }
+  
+  
+  
+  
+  
+  
+  
+  
+  .student-item .student-controls-box {
+    position: absolute;
+    bottom: 0;
+    right: 5px;
+  
+    display: flex;
+    // hide by default
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(0);
+  
+    transition: opacity 0.2s, visibility 0.2s;
+  }
+  
+  .student-item:hover .student-controls-box {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  
+    transition-delay: 0.4s;
+  }
+  
+  .student-controls-box .student-control-button {
+    background: #f5f7f8;
+  
+    padding: 0px 10px;
+  
+    mat-icon {
+      font-size: 20px;
+      color: #555;
+    }
+  
+    &:hover {
+      background: #eee;
+      mat-icon {
+        color: #333;
+      }
+    }
+  
+    &:active {
+      background: #e5e7e8;
+    }
+  
+    &:first-of-type {
+      border-top-left-radius: 7px;
+    }
+    &:last-of-type {
+      border-top-right-radius: 7px;
+    }
+  }
+  
+  .student-controls-box .student-control-button.btn-danger:hover mat-icon {
+    color: rgb(155, 27, 27);
+  }
+  
+  .todo-controls-box .todo-control-button.btn-danger:active mat-icon {
+    color: rgb(248, 16, 16);
+  }
+
+  .btn {
+    margin-left: 5px;
+  }
+
+  strong {
+    margin-right: 5px;
+  }
+
+  .p2 {
+    margin-top: 6px;
+  }

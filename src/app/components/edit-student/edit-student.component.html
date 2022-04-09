@@ -1,0 +1,74 @@
+<form class="animate__backInDown" #form="ngForm" (ngSubmit)="onFormSubmit(form)">
+    <h2>Uređivanje studenta</h2>
+    <div class="d-flex flex-column" style="margin: 0">
+     <div class="form-group">
+      <label for="brojIndeksa">Broj indeksa</label>
+        <input
+          [(ngModel)]="student.brojIndeksa"
+          #brojIndeksaField="ngModel"
+          required
+          minlength="2"
+          name="brojIndeksa"
+          class="input form-control"
+          type="text"
+          
+        />
+      </div>
+        <div class="form-group">
+        <label for="ime">Ime studenta:</label>
+        <input
+          [(ngModel)]="student.ime"
+          #imeField="ngModel"
+          name="ime"
+          class="input form-control"
+          type="text"
+          
+        />
+      </div>
+        <div class="form-group">
+        <label for="prezime">Prezime studenta:</label>
+        <input
+          [(ngModel)]="student.prezime"
+          #prezimeField="ngModel"
+          name="prezime"
+          class="input form-control"
+          type="text"
+          
+        />
+      </div>
+        <div class="form-group">
+        <label for="godinaStudija">Godina studija:</label>
+        <input
+          [(ngModel)]="student.godinaStudija"
+          #godinaStudijaField="ngModel"
+          name="godinaStudija"
+          class="input form-control"
+          type="text"
+          
+        />
+      </div>
+        <div class="form-group">
+       <label for="statusStudenta">Status studenta:</label>
+        
+           <select name="statusStudenta" 
+        [(ngModel)]="student.statusStudenta"
+        #statusStudentaField="ngModel" >
+        
+          <option *ngFor="let suit of statusiStudenta">{{suit}}</option>
+        </select>
+      </div>
+      <p class="control">
+        <button type="submit" class="btn btn-success">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i> Spasi izmjene
+        </button>
+        <button type="button" class="btn btn-danger" (click)="close()">
+            <i class="fa fa-ban" aria-hidden="true"></i> Odustani
+        </button>
+      </p>
+    </div>
+    <ng-container *ngIf="statusStudentaField.invalid || brojIndeksaField.invalid && showValidationError === true">
+<p *ngIf="statusStudentaField.hasError('requred') || brojIndeksaField.hasError('requred')">Status studenta i broj indeksa su obavezni</p>
+    </ng-container>
+
+
+</form>

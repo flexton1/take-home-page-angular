@@ -1,0 +1,74 @@
+/* You can add global styles to this file, and also import other style files */
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html{    
+    padding: 0;
+    height: 100%;  
+  }
+  body{
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    overflow-y: scroll;
+    margin-top: 63px;
+    height: 100%; 
+  }
+
+  body::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+}
+  
+  input.ng-invalid.ng-touched {
+    border: 1px solid red;
+  }
+  
+  .login,
+  .sign-up {
+    background-color: #0079D3;
+    border-color: #0079D3;
+    color: aliceblue;
+    fill: #0079D3;
+    border: 1px solid;
+    border-radius: 4px;
+    text-align: center;
+    letter-spacing: 1px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    line-height: 24px;
+    text-transform: uppercase;
+    padding: 3px 16px;
+    opacity: 1;
+  }
+  
+/* TOASTR BUGFIX */
+#toast-container > div {
+  opacity: 1;
+}
+.toast {
+  font-size: initial !important;
+  border: initial !important;
+  backdrop-filter: blur(0) !important;
+}
+.toast-success {
+  background-color: #51A351 !important;
+}
+.toast-error {
+  background-color: #BD362F !important;
+}
+.toast-info {
+  background-color: #2F96B4 !important;
+}
+.toast-warning {
+  background-color: #F89406 !important;
+}
+ 
+
+.mat-tooltip {
+  font-size: 18px !important;
+}
+
+button {
+  box-shadow: 0px 1px 2px rgba(black, 0.2);
+}

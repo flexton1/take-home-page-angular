@@ -1,0 +1,33 @@
+<div class="container animate_backInLeft">
+<div>
+<h1 class="text-center">Lista svih studenata</h1>
+<div class="d-flex flex-wrap justify-content-center">
+<button class="btn btn-primary" (click)="onAddClicked()"><i class="fa fa-plus" aria-hidden="true"></i>Novi student</button>
+<ng-container *ngIf="studenti.length > 0">
+<form class="form-inline">
+<input type="search" (ngModelChange)="searchStudents(key.value)" ngModel
+#key="ngModel" name="key" id="searchStudents" class="form-control" placeholder="Pretraga studenata">
+</form>
+</ng-container>
+</div>
+</div>
+<app-add-student *ngIf="showAddStudent"></app-add-student>
+<app-studenti-item
+ *ngFor="let student of studenti" 
+[student]="student"
+(detailsClicked)="detailsStudent(student)"
+(editClicked)="editStudent(student)"
+(deleteClicked)="deleteStudent(student.pkStudentId)"></app-studenti-item>
+
+
+</div>
+
+<div class="container nostudent-alert">
+<div *ngIf="studenti?.length === 0" class="col-lg-12 col-md-12 col-xs-12">
+    <div class="alert alert-info">
+        <h4 class="alert-heading">NEMA STUDENATA!</h4>
+        <p>Nije pronađen nijedan student</p>
+    </div>
+
+</div>
+</div>

@@ -1,0 +1,21 @@
+<mat-nav-list>
+    <a mat-list-item (click)="onSidenavClose(); onTitleClicked()">
+        <mat-icon>home</mat-icon> <span class="nav-caption">Pocetna</span>
+    </a>
+    <ng-container *ngIf="!isLoggedIn">
+    <a mat-list-item routerLink="/" (click)="onSidenavClose()">
+        <mat-icon>photo</mat-icon> <span class="nav-caption">Prijava</span>
+    </a>
+    <a mat-list-item routerLink="/kontakt" (click)="onSidenavClose()">
+        <mat-icon>perm_contact_calendar</mat-icon><span class="nav-caption">Registracija</span>
+    </a>
+</ng-container>
+<ng-container *ngIf="isLoggedIn">
+    <a mat-list-item (click)="onSidenavClose(); goToUserProfile()">
+        <mat-icon>photo</mat-icon> <span class="nav-caption">Moj Profil</span>
+    </a>
+    <a mat-list-item (click)="onSidenavClose(); logout()">
+        <mat-icon>perm_contact_calendar</mat-icon><span class="nav-caption">Odjava</span>
+    </a>
+</ng-container>
+  </mat-nav-list>

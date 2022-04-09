@@ -1,0 +1,19 @@
+
+    <h2>Detalji o studentu</h2>
+    <div class="d-flex flex-column" style="margin: 0">
+     <p>Broj indeksa: {{student.brojIndeksa}}</p>
+     <p>Ime studenta:<span *ngIf="student.ime?.length === 0 || !student.ime">Nema podataka</span> {{student.ime}}</p>
+     <p>Prezime studenta:<span *ngIf="student.prezime?.length === 0 || !student.prezime"></span> {{student.prezime}}</p>
+     <p>Godina studija:<span *ngIf="student.godinaStudija?.length === 0 || !student.godinaStudija"></span> {{student.godinaStudija}}</p>
+     <p>Status studenta: {{student.statusStudenta}}</p>
+
+      <p class="control">
+        <button type="button" class="btn btn-danger" (click)="close()">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i> Povratak
+        </button>
+      </p>
+    </div>
+
+
+
+

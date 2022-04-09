@@ -1,0 +1,26 @@
+<mat-toolbar color="white">
+    <div fxHide.gt-xs>
+        <button mat-icon-button (click)="onToggleSidenav()">
+            <mat-icon>menu</mat-icon>
+        </button>
+    </div>
+    <div>
+        <a (click)="onTitleClicked()">Studentska služba</a>
+    </div>
+    <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
+        <ul fxLayout fxLayoutGap="15px" *ngIf="isLoggedIn" class="navigation-items">
+            <li><a (click)="goToUserProfile()">Moj profil</a></li>
+            <li>
+                <a (click)="logout()">Odjava</a>
+            </li>
+        </ul>
+        <ul fxLayout fxLayoutGap="15px" *ngIf="!isLoggedIn" class="navigation-items">
+            <li>
+                <a routerLink="/sign-up">Registracija</a>
+            </li>
+            <li>
+                <a routerLink="/">Prijava</a>
+            </li>
+        </ul>
+    </div>
+  </mat-toolbar>

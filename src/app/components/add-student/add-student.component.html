@@ -1,0 +1,71 @@
+<form class="animate__backInDown" #form="ngForm" (ngSubmit)="onFormSubmit(form)">
+    <h2>Novi student</h2>
+    <div class="d-flex flex-column" style="margin: 0">
+     <div class="form-group">
+      <label for="brojIndeksa">Broj indeksa</label>
+        <input
+          [(ngModel)]="student.brojIndeksa"
+          #brojIndeksaField="ngModel"
+          required
+          minlength="2"
+          name="brojIndeksa"
+          class="input form-control"
+          type="text"
+          
+        />
+      </div>
+        <div class="form-group">
+        <label for="ime">Ime studenta:</label>
+        <input
+          [(ngModel)]="student.ime"
+          #imeField="ngModel"
+          name="ime"
+          class="input form-control"
+          type="text"
+          
+        />
+      </div>
+        <div class="form-group">
+        <label for="prezime">Prezime studenta:</label>
+        <input
+          [(ngModel)]="student.prezime"
+          #prezimeField="ngModel"
+          name="prezime"
+          class="input form-control"
+          type="text"
+          
+        />
+      </div>
+        <div class="form-group">
+        <label for="godinaStudija">Godina studija:</label>
+        <input
+          [(ngModel)]="student.godinaStudija"
+          #godinaStudijaField="ngModel"
+          name="godinaStudija"
+          class="input form-control"
+          type="text"
+          
+        />
+      </div>
+        <div class="form-group">
+       <label for="statusStudenta">Status studenta:</label>
+        
+           <select name="statusStudenta" 
+        [(ngModel)]="student.statusStudenta"
+        #statusStudentaField="ngModel" >
+        
+          <option *ngFor="let suit of statusiStudenta">{{suit}}</option>
+        </select>
+      </div>
+      <p class="control">
+        <button type="submit" class="btn btn-success">
+          <i class="fa fa-plus" aria-hidden="true"></i> Kreiraj
+        </button>
+      </p>
+    </div>
+    <ng-container *ngIf="statusStudentaField.invalid || brojIndeksaField.invalid && showValidationError === true">
+<p style="color: red; font-size: 18px;">Status studenta i broj indeksa su obavezni <i class="fa fa-exclamation-triangle" aria-hidden="true"></i></p>
+    </ng-container>
+
+
+</form>
