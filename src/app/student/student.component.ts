@@ -55,9 +55,10 @@ onAddClicked(){
 
   deleteStudent(id: number){
     	this.studentService.deleteStudent(id).subscribe((data) => {
-        console.log(' deleted response', data);
-        this._router.navigateByUrl('/student');
-        return window.location.reload();;
+       
+     this.studenti = this.studenti.filter((s) => s.pkStudentId !== id);
+        // this._router.navigateByUrl('/student');
+        // return window.location.reload();;
   })};
     
 

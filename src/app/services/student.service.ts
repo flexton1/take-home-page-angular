@@ -36,6 +36,6 @@ statusStudenta.statusStudenta = student.statusStudenta;
 }
 
 deleteStudent(id: number): Observable<any>{
-  return this._httpClient.delete("http://localhost:8080/api/student/delete/" + `${id}`, {responseType: 'text'});
+  return this._httpClient.delete("http://localhost:8080/api/student/delete/" + `${id}`);
 }
 }
