@@ -23,7 +23,7 @@ showAddStudent: boolean = false;
   private studentService: StudentService,
   private dialog: MatDialog,
   private _router: Router,
-  private scroller: ViewportScroller  
+  private scroller: ViewportScroller
   ) { }
 
   ngOnInit() {
@@ -51,16 +51,21 @@ onAddClicked(){
       data: student,
     });
   }
-  
+
 
   deleteStudent(id: number){
     	this.studentService.deleteStudent(id).subscribe((data) => {
-       
-     this.studenti = this.studenti.filter((s) => s.pkStudentId !== id);
-        // this._router.navigateByUrl('/student');
-        // return window.location.reload();;
-  })};
-    
+
+     console.log(data);
+
+
+  });
+ return this.studenti = this.studenti.filter((s) => s.pkStudentId !== id);
+
+  // return window.location.reload();
+
+};
+
 
   public searchStudents(key: string): void{
     const result: Student[] = [];
