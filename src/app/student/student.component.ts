@@ -34,6 +34,10 @@ onAddClicked(){
   this.showAddStudent = !this.showAddStudent;
 }
 
+closeAddStudent(){
+    this.showAddStudent = false;
+}
+
   editStudent(student: Student){
      let dialogRef = this.dialog.open(EditStudentComponent, {
       width: '70%',
@@ -43,6 +47,10 @@ onAddClicked(){
     dialogRef.afterClosed().subscribe((result) => {
      this.scroller.scrollToAnchor(`${student.pkStudentId}`)
     });
+  }
+
+  hideAddStudent(){
+    this.showAddStudent = false;
   }
 
   detailsStudent(student: Student){

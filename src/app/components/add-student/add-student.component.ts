@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -13,7 +13,9 @@ import { StudentService } from 'src/app/services/student.service';
 })
 export class AddStudentComponent implements OnInit {
 
-student: Student = new Student;
+  @Output() public hideAddStudent = new EventEmitter ();
+
+  student: Student = new Student;
 showValidationError: boolean = false;
 
   constructor(private studentService: StudentService, private router: Router,
@@ -30,10 +32,10 @@ onFormSubmit(form: NgForm){
       console.log('response', data);
       this.router.navigate([this.router.url]);
     });
-   
+
     this.showValidationError = false;
    form.reset();
-     window.location.reload();
+    this.hideAddStudent.emit();
      return this.toastr.success('Dodali ste studenta');
   }
 }
