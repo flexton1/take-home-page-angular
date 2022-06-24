@@ -1,7 +1,9 @@
 import { ViewportScroller } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Subscriber, Subscription } from 'rxjs';
+import { AddStudentComponent } from '../components/add-student/add-student.component';
 import { DetailsComponent } from '../components/details/details.component';
 import { EditStudentComponent } from '../components/edit-student/edit-student.component';
 import { Student } from '../model/student';
@@ -13,6 +15,11 @@ import { StudentService } from '../services/student.service';
   styleUrls: ['./student.component.scss']
 })
 export class StudentComponent implements OnInit {
+
+  notifyAboutChange: Subscription = this.studentService.eventEmitterNotifier.subscribe((e) => {
+    this.loadData();
+  })
+
 student: Student = new Student();
 
 studenti: Array<Student> = [];
@@ -27,7 +34,7 @@ showAddStudent: boolean = false;
   ) { }
 
   ngOnInit() {
-    this.studentService.getAllStudents().subscribe((data)=> (this.studenti = data));
+    this.loadData();
   }
 
 onAddClicked(){
@@ -48,6 +55,11 @@ closeAddStudent(){
      this.scroller.scrollToAnchor(`${student.pkStudentId}`)
     });
   }
+
+loadData(){
+  this.studentService.getAllStudents().subscribe((data)=> (this.studenti = data));
+
+}
 
   hideAddStudent(){
     this.showAddStudent = false;

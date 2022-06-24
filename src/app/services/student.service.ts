@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth/shared/auth.service';
 import { StatusStudenta } from '../model/status-studenta';
@@ -9,6 +9,8 @@ import { Student } from '../model/student';
   providedIn: 'root'
 })
 export class StudentService {
+
+  eventEmitterNotifier: EventEmitter<null> = new EventEmitter();
 
 
   constructor(private _httpClient: HttpClient,
@@ -25,6 +27,10 @@ getAllStudents() {
 addStudent(student: Student): Observable<Student>{
   
   return this._httpClient.post<Student>("http://localhost:8080/api/student/edit/" + `${this.getUserName()}`, student);
+}
+
+notifyAboutChange(){
+  this.eventEmitterNotifier.emit();
 }
 
 saveStatus(student: Student): Observable<StatusStudenta> {
