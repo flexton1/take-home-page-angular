@@ -21,12 +21,12 @@ export class StudentService {
     }
 
 getAllStudents() {
-  return this._httpClient.get<Student[]>('http://localhost:8080/api/student/tabela/'+ `${this.getUserName()}`).pipe(response => response);
+  return this._httpClient.get<Student[]>('https://studentska-sluzba-spring.herokuapp.com/api/student/tabela/'+ `${this.getUserName()}`).pipe(response => response);
 }
 
 addStudent(student: Student): Observable<Student>{
-  
-  return this._httpClient.post<Student>("http://localhost:8080/api/student/edit/" + `${this.getUserName()}`, student);
+
+  return this._httpClient.post<Student>("https://studentska-sluzba-spring.herokuapp.com/api/student/edit/" + `${this.getUserName()}`, student);
 }
 
 notifyAboutChange(){
@@ -38,10 +38,10 @@ let statusStudenta: StatusStudenta = new StatusStudenta();
 statusStudenta.pkStudentId = student.pkStudentId;
 statusStudenta.statusStudenta = student.statusStudenta;
 
-  return this._httpClient.post<Student>("http://localhost:8080/api/student/status", statusStudenta);
+  return this._httpClient.post<Student>("https://studentska-sluzba-spring.herokuapp.com/api/student/status", statusStudenta);
 }
 
 deleteStudent(id: number): Observable<any>{
-  return this._httpClient.delete("http://localhost:8080/api/student/delete/" + `${id}`);
+  return this._httpClient.delete("https://studentska-sluzba-spring.herokuapp.com/api/student/delete/" + `${id}`);
 }
 }
