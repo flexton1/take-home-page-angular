@@ -31,8 +31,8 @@ onFormSubmit(form: NgForm){
     this.studentService.addStudent(this.student).subscribe((data) => {
       console.log('response', data);
       this.router.navigate([this.router.url]);
+      this.studentService.notifyAboutChange();
     });
-
     this.showValidationError = false;
    form.reset();
     this.hideAddStudent.emit();
