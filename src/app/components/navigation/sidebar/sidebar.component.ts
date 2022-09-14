@@ -1,5 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from 'src/app/auth/shared/auth.service';
 
 @Component({
@@ -7,16 +8,23 @@ import { AuthService } from 'src/app/auth/shared/auth.service';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent implements OnInit {
-username: string;
-isLoggedIn: boolean;
+export class SidebarComponent implements OnInit, OnDestroy {
+
+  private _unsubscribeAll: Subject<void> = new Subject<void>;
+
+username?: string;
+isLoggedIn?: boolean;
 
   @Output() sidenavClose = new EventEmitter();
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    this.authService.loggedIn.subscribe((data: boolean) => this.isLoggedIn = data);
-    this.authService.username.subscribe((data: string) => this.username = data);
+    this.authService.loggedIn
+    .pipe(takeUntil(this._unsubscribeAll))
+    .subscribe((data: boolean) => this.isLoggedIn = data);
+    this.authService.username
+    .pipe(takeUntil(this._unsubscribeAll))
+    .subscribe((data: string) => this.username = data);
     this.isLoggedIn = this.authService.isLoggedIn();
     this.username = this.authService.getUserName();
   }
@@ -41,5 +49,9 @@ isLoggedIn: boolean;
     }else {
       this.router.navigateByUrl('');
     }
+  }
+
+  ngOnDestroy(): void {
+    this._unsubscribeAll.next();
   }
 }

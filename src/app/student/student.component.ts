@@ -1,8 +1,8 @@
 import { ViewportScroller } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Subscriber, Subscription } from 'rxjs';
+import { Subject, Subscriber, Subscription, takeUntil } from 'rxjs';
 import { AddStudentComponent } from '../components/add-student/add-student.component';
 import { DetailsComponent } from '../components/details/details.component';
 import { EditStudentComponent } from '../components/edit-student/edit-student.component';
@@ -14,9 +14,13 @@ import { StudentService } from '../services/student.service';
   templateUrl: './student.component.html',
   styleUrls: ['./student.component.scss']
 })
-export class StudentComponent implements OnInit {
+export class StudentComponent implements OnInit, OnDestroy {
 
-  notifyAboutChange: Subscription = this.studentService.eventEmitterNotifier.subscribe((e) => {
+  private _unsubscribeAll: Subject<void> = new Subject<void>;
+
+  notifyAboutChange: Subscription = this.studentService.eventEmitterNotifier
+  .pipe(takeUntil(this._unsubscribeAll))
+  .subscribe((e) => {
     this.loadData();
   })
 
@@ -51,13 +55,17 @@ closeAddStudent(){
       data: student,
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed()
+    .pipe(takeUntil(this._unsubscribeAll))
+    .subscribe((result) => {
      this.scroller.scrollToAnchor(`${student.pkStudentId}`)
     });
   }
 
 loadData(){
-  this.studentService.getAllStudents().subscribe((data)=> (this.studenti = data));
+  this.studentService.getAllStudents()
+  .pipe(takeUntil(this._unsubscribeAll))
+  .subscribe((data)=> (this.studenti = data));
 
 }
 
@@ -74,7 +82,9 @@ loadData(){
 
 
   deleteStudent(id: number){
-    	this.studentService.deleteStudent(id).subscribe((data) => {
+    	this.studentService.deleteStudent(id)
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((data) => {
 
      console.log(data);
 
@@ -102,7 +112,14 @@ loadData(){
     this.studenti = result;
 
     if(result.length === 0 || !key){
-      this.studentService.getAllStudents().subscribe((data)=> (this.studenti = data));
+      this.studentService.getAllStudents()
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((data)=> (this.studenti = data));
     }
+  }
+
+  ngOnDestroy(): void {
+    
+    this._unsubscribeAll.next();
   }
 }

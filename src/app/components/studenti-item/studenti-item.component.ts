@@ -8,7 +8,7 @@ import { Student } from 'src/app/model/student';
 })
 export class StudentiItemComponent implements OnInit {
 
-  @Input() student: Student;
+  @Input() student?: Student;
 
   @Output() editClicked: EventEmitter<void> = new EventEmitter();
   @Output() deleteClicked: EventEmitter<void> = new EventEmitter();
